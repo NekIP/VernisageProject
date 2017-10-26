@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "name": "package.json",
+  "private": true,
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "node-sass": "^4.5.3",
+    "resolve-url-loader": "^2.1.1",
+    "rimraf": "2.5.4",
+    "sass-loader": "^6.0.6",
+   "style-loader": "^0.19.0",
+    "webpack": "^3.8.1"
+  },
+  "main": "./wwwroot/js/all.js",
+  "dependencies": {
+    "file-loader": "^1.1.5",
+    "url-loader": "^0.6.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

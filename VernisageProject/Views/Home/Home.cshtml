@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{ 
+	Layout = "~/Views/Index.cshtml";
+	ViewBag.Title = "Вернисаж - сеть ювелирных салонов";
+	ViewBag.Script = "home.js";
+}
+
+<div class="content">
+	<div class="gretting">
+		<div class="logo"></div>
+	</div>
+	<div class="categories content-center">
+		<a href="#" class="category" id="content-category-01">
+			<span class="caption">Новинки</span><br />
+			<div class="description">Новые поступления товаров</div>
+		</a>
+		<a href="#" class="category" id="content-category-02">
+			<span class="caption">Наши бренды</span><br />
+			<div class="description">Товары известных <br />  брендов</div>
+		</a>
+		<a href="#" class="category" id="content-category-03">
+			<span class="caption">Акции и скидки</span><br />
+			<div class="description">Специальные предложения, сертификаты <br /> дисконтные карты</div>
+		</a>
+	</div>
+	<div class="why-us">
+		<div class="content content-center">
+			<div class="hello">Почему выбирают нас</div>
+			<div class="advantage">
+				<div class="logo"><img src="~/images/home/why-models.png" /></div>
+				<span class="caption">ЭКСКЛЮЗИВНЫЕ <br /> МОДЕЛИ</span><br />
+				<hr noshade class="line">
+				<span class="description">
+					Мы предоставляем Вам возможность заказать изготовление эксклюзивных ювелирных изделий.
+					Их выполнят лучшие российские мастера-ювелиры и современные дизайнеры.
+				</span>
+				<hr noshade class="line">
+			</div>
+			<div class="advantage">
+				<div class="logo"><img src="~/images/home/why-rock.png" /></div>
+				<span class="caption">ОГРОМНЫЙ АССОРТИМЕНТ <br /> РЕДКИХ КАМНЕЙ</span><br />
+				<hr noshade class="line">
+				<span class="description">
+					Мы предоставляем Вам широкий выбор редких драгоценных и полудрагоценных камней.
+					Хочется подарить очень редкое или совершенно уникальное украшение?
+					Мы поможем подобрать центральные камни для украшения.
+				</span>
+				<hr noshade class="line">
+			</div>
+			<div class="advantage">
+				<div class="logo"><img src="~/images/home/why-individ.png" /></div>
+				<span class="caption">ИНДИВИДУАЛЬНЫЙ <br /> ПОДХОД</span><br />
+				<hr noshade class="line">
+				<span class="description">
+					При заказе украшения,мы поможем подобрать комплект украшений, свяжемся с заводом-производителем
+					и закажем необходимый вам образчик с нужным Вам каменем и размером в кратчайшие сроки.
+				</span>
+				<hr noshade class="line">
+			</div>
+		</div>
+	</div>
+	<div class="popular">
+		<div class="content content-center">
+			<div class="hello">Популярные товары</div>
+			<div class="items">
+				<a href="#" class="item" id="popular-content-item-01">
+					<div class="info">
+						<div class="caption">Комплект «камень»</div>
+						<div class="descsription">
+							Кольцо - золото 456, Топаз-31.95 карат;
+							115 бриллиантов Кр57-0.89 карата, 3/3. Серьги - золото 675,
+							Топазы 2 шт-51.15 гр: 138 бриллиантов Кр57-1.08 карата, 3/3.
+						</div>
+						<div class="price">
+							1119 руб
+						</div>
+						<div class="price-caption">Средняя цена</div>
+					</div>
+				</a>
+				<a href="#" class="item" id="popular-content-item-02">
+					<div class="info">
+						<div class="caption">Комплект «звезда»</div>
+						<div class="descsription">
+							Серьги - золото 345, Топаз-32.85 карат;
+							115 бриллиантов Кр57-0.89 карата, 3/3.
+						</div>
+						<div class="price">
+							1363 руб
+						</div>
+						<div class="price-caption">Средняя цена</div>
+					</div>
+				</a>
+				<a href="#" class="item" id="popular-content-item-03">
+					<div class="info">
+						<div class="caption">Комплект «русалка»</div>
+						<div class="descsription">
+							Кольцо - золото 585, Топаз-31.95 карат;
+							115 бриллиантов Кр57-0.89 карата, 3/3. Серьги - золото 585,
+							Топазы 2 шт-51.15 гр: 138 бриллиантов Кр57-1.08 карата, 3/3.
+						</div>
+						<div class="price">
+							2000 руб
+						</div>
+						<div class="price-caption">Средняя цена</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+

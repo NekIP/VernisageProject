@@ -1,0 +1,189 @@
+﻿.content {
+    .gretting {
+        background: url(../images/home/background-women.png) no-repeat;
+        background-size: cover;
+        height: 465px;
+
+        .background {
+            width: 100%;
+            min-width: $center-width;
+        }
+
+        .logo {
+            position: relative;
+            width: $center-width;
+            height: 100px;
+            top: 40px;
+            margin: 0 auto;
+            background: url(../images/home/elle-logo.png) no-repeat;
+            background-position-x: 10px;
+        }
+    }
+
+    .categories {
+        height: 230px;
+
+        a {
+            text-decoration: none;
+        }
+
+        .category {
+            float: left;
+            width: 259px;
+            height: 131px;
+            border-bottom: 3px solid transparent;
+            margin: 21px 10px;
+            padding: 30px 20px;
+            background-blend-mode: luminosity;
+
+            .caption {
+                font-size: 30px;
+                color: $red-color;
+            }
+
+            .description {
+                width: 182px;
+                color: $gray-color;
+            }
+        }
+
+        .category:hover {
+            background-blend-mode: darken;
+            border-bottom: 3px solid $red-color;
+        }
+
+        #content-category-01 {
+            background: #fff url(../images/home/background-novelties.png);
+        }
+
+        #content-category-02 {
+            background: #fff url(../images/home/background-brend.png);
+        }
+
+        #content-category-03 {
+            background: #fff url(../images/home/shares-background.png);
+        }
+    }
+
+    .why-us {
+        background-image: linear-gradient(45deg, transparent 50%, #d5d5d5 50%, #d5d5d5 60%, transparent 60%), linear-gradient(45deg, #d5d5d5 10%, transparent 10%);
+        background-color: #e0e0e0;
+        background-size: 1em 1em;
+
+        .content {
+            padding: 30px;
+            height: 530px;
+
+            .hello {
+                margin: 0 10px 40px 10px;
+                padding-left: 20px;
+                border-left: 4px solid $red-color;
+                font-size: 43px;
+            }
+
+            .advantage {
+                float: left;
+                width: 259px;
+                height: 131px;
+                padding: 30px 20px;
+                margin: 21px 10px;
+                text-align: center;
+
+                .logo {
+                    margin-bottom: 16px;
+                    height: 110px;
+                }
+
+                .line {
+                    width: 73px;
+                    height: 2px;
+                    border: 0px;
+                    margin: 21px auto;
+                    background-color: #bfa78e;
+                }
+
+                .caption {
+                    font-size: 16px;
+                    font-family: rodeoc;
+                }
+            }
+        }
+    }
+
+    .popular {
+        width: 100%;
+        height: 497px;
+        background: url(../images/home/popular-background.png);
+        background-size: cover;
+
+        .content {
+            padding: 30px;
+            height: 530px;
+
+            .hello {
+                margin: 0 10px 40px 10px;
+                padding-left: 20px;
+                border-left: 4px solid $red-color;
+                color: $header-text-color-white;
+                font-size: 43px;
+            }
+
+            .items {
+                padding: 0 27px;
+
+                a {
+                    text-decoration: none;
+                }
+
+                .item {
+                    float: left;
+                    width: 300px;
+                    height: 300px;
+                    border: 1px solid #fff;
+
+                    .info {
+                        width: 240px;
+                        height: 255px;
+                        padding: 45px 30px 0px 30px;
+                        background: rgba(255, 255, 255, 0.7);
+                        opacity: 0;
+                        text-align: center;
+                        color: #242424;
+
+                        .caption {
+                            font-size: 26px;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                        }
+
+                        .price {
+                            font-size: 26px;
+                            margin-top: 10px;
+                            margin-bottom: 0px;
+                        }
+
+                        .price-caption {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .info:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            #popular-content-item-01 {
+                background: url(../images/home/popular-product.png);
+            }
+
+            #popular-content-item-02 {
+                background: url(../images/home/popular-product01.png);
+            }
+
+            #popular-content-item-03 {
+                background: url(../images/home/popular-product02.png);
+            }
+        }
+    }
+}

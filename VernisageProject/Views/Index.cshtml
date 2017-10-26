@@ -1,0 +1,20 @@
+﻿<html ng-app="vernisageApp">
+	<head>
+		<title>@ViewBag.Title</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="~/dist/style.css">
+	</head>
+	<body>
+		<div id="vueApp">
+			<header class="header">
+				@Html.Partial("Shared/Head.cshtml")
+			</header>
+			<div>{{hello}}</div>
+			@RenderBody()
+			<footer class="footer">
+				@Html.Partial("Shared/Foot.cshtml")
+			</footer>
+		</div>
+		<script src="~/dist/build.js"></script>
+	</body>
+</html>

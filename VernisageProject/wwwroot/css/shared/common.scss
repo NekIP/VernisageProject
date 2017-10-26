@@ -1,0 +1,27 @@
+﻿$header-text-color: #cc9562;
+$header-text-color-white: #cdcdcd;
+$red-color: #700707;
+$gray-color: #636363;
+$header-data-heigth: 72px;
+$contact-number-font-size: 28px;
+$center-width: 960px;
+
+@font-face {
+    font-family: oranienbaum;
+    src: url(../fonts/oranienbaum.ttf);
+}
+
+@font-face {
+    font-family: rodeoc;
+    src: url(../fonts/rodeoc.otf) format("opentype");
+}
+
+body {
+    margin: 0px;
+    font-family: oranienbaum
+}
+
+.content-center {
+    margin: 0px auto;
+    width: $center-width;
+}
