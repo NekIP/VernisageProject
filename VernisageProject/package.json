@@ -25,7 +25,9 @@
 	"main": "./wwwroot/js/all.js",
 	"dependencies": {
 		"file-loader": "^1.1.5",
-		"url-loader": "^0.6.2"
+		"jquery": "^3.2.1",
+		"url-loader": "^0.6.2",
+		"vue": "^2.5.3"
 	},
 	"scripts": {
 		"build": "webpack",

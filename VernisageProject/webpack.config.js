@@ -27,14 +27,14 @@ module.exports = {
 			{
 				test: /\.woff2?$|\.ttf$|\.otf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
 				loader: 'file-loader'
-			},
+			}/*,
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader'
-			}
+			}*/
 		],
-		/*rules: [
-			{
+		rules: [
+			/*{
 				test: /\.scss$/,
 				use: extractSass.extract({
 					use: [
@@ -50,8 +50,12 @@ module.exports = {
 					],
 					fallback: 'style-loader'
 				})
-			},
-		]*/
+			},*/
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader'
+			}
+		]
 	},
 	plugins: [
 		new ExtractTextPlugin('styles.css', {
