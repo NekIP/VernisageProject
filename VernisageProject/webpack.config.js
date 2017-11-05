@@ -2,10 +2,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
-const extractSass = new ExtractTextPlugin({
+/*const extractSass = new ExtractTextPlugin({
 	filename: "style.css",
 	disable: process.env.NODE_ENV === 'development'
-});
+});*/
 
 module.exports = {
 	entry: "./wwwroot/app",
@@ -13,7 +13,7 @@ module.exports = {
 		path: path.resolve("./wwwroot", 'dist'),
 		filename: "build.js"
 	},
-	devtool: 'source-map',
+	//devtool: 'source-map',
 	module: {
 		loaders: [
 			{
@@ -67,6 +67,10 @@ module.exports = {
 			"window.jQuery": "jquery/dist/jquery.min.js",
 			Vue: 'vue/dist/vue.min.js'
 		}),
-		//new webpack.optimize.UglifyJsPlugin()
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		})
 	]
 };

@@ -1,5 +1,5 @@
-﻿import "./home/all.js";
-//import "./debug/all.js";
-import './shared/all.js';
+﻿import './shared/all.js';
+import "./home/all.js";
+import "./test/all.js";
 
-import './config.js';
+//import './config.js';

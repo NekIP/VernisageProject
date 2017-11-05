@@ -19,4 +19,6 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4dist_4build_1js_1map__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

@@ -1,1 +1,65 @@
-﻿
+﻿.custom-select {
+    background: white;
+    width: 200px;
+    height: auto;
+    text-align: center;
+    cursor: pointer;
+
+    .current-value {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        i {
+            padding: 0.2em;
+            font-size: 0.8em;
+            float: right;
+            vertical-align: central;
+            color: $header-text-color;
+        }
+    }
+
+    .selector {
+        position: absolute;
+        margin-top: 10px;
+        max-height: 300px;
+        width: 200px;
+        background: white;
+        text-align: center;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        overflow-y: auto;
+
+        .selector-item {
+            margin: 3px 0 3px 0;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .selector-item:last-child {
+            margin: 3px 0 0 0;
+        }
+
+        .selector-item:first-child {
+            margin: 0 0 3px 0;
+        }
+
+        .selector-item:hover {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+
+        .selected {
+            box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+    }
+
+    .slide-fade-enter-active {
+        transition: all .1s ease;
+    }
+
+    .slide-fade-leave-active {
+        transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active до версии 2.1.8 */ {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}

@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VernisageProject.Controllers
 {
-    public class DebugController : Controller
+    public class TestController : Controller
     {
-        public IActionResult Demonstration()
+		[Route("test")]
+        public IActionResult Test()
         {
             return View();
         }
