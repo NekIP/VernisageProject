@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace VernisageProject.Models.Shared.Components.FileManager {
-	public class FileType {
+	public enum FileType {
+		Folder,
+		File
 	}
 }
