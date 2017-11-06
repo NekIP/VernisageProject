@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using VernisageProject.DataBase.Repositories;
+using VernisageProject.Buisness.Shared.Components.FileManager;
 
 namespace VernisageProject {
 	public class Startup {
@@ -56,6 +57,7 @@ namespace VernisageProject {
 
 		private void ConfigureUserServices(IServiceCollection services) {
 			services.AddTransient<IProductsRepository, ProductsRepository>();
+			services.AddTransient<IFileManager, FileManager>();
 		}
 	}
 }

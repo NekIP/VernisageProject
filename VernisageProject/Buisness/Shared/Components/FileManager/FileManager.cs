@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace VernisageProject.Buisness.Shared.Components.FileManager {
 	public interface IFileManager {
-
 	}
 
-	public class FileManager {
+	public class FileManager : IFileManager {
+
 	}
 }
