@@ -200,6 +200,15 @@ body {
     transform: translateY(-30px);
     opacity: 0; }
 
+.file-loader {
+  width: 500px;
+  height: 500px;
+  border: 5px solid black; }
+  .file-loader .file-loader-interface {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto; }
+
 .content .gretting {
   background: url(../images/home/background-women.png) no-repeat;
   background-size: cover;

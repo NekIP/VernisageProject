@@ -68,6 +68,8 @@
 				else if (event.keyCode == 13) {	// enter
 					this.show();
 				}
+				event.preventDefault();
+				event.stopPropagation();
 			},
 			setResult: function (item) {
 				this.result.value = item;

@@ -1,1 +1,11 @@
-﻿
+﻿.file-loader {
+    width: 500px;
+    height: 500px;
+    border: 5px solid black;
+
+    .file-loader-interface {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+}

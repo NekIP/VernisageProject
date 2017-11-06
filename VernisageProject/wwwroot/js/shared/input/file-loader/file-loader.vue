@@ -1,7 +1,9 @@
 ﻿<template>
-	<div class="file-loader">
-		<input type="file" multiple="multiple" @change="change">
-		<input type="submit" @click="send">
+	<div id="rrrt" class="file-loader" v-on:dragenter="dragenter" v-on:dragleave="dragleave" v-on:dragover="dragOver" v-on:drop="drop">
+		<div class="file-loader-interface">
+			<input type="file" multiple="multiple" @change="change">
+			<input type="submit" @click="send">
+		</div>
 	</div>
 </template>
 
@@ -22,7 +24,6 @@
 			change: function (event) {
 				var element = event.target;
 				this.files = element.files;
-				console.log(this.files);
 			},
 			send: function () {
 				var data = new FormData();
@@ -31,8 +32,22 @@
 				});
 				
 				fileLoaderApi.sendFile.execute(data, function (data) {
-					
+					alert("complete");
 				});
+			},
+			drop: function () {
+				event.preventDefault();
+				this.files = event.dataTransfer.files;
+				this.send();
+			},
+			dragenter: function (event) {
+				var element = $(event.target);
+			},
+			dragleave: function (event) {
+				var element = $(event.target);
+			},
+			dragOver: function () {
+				event.returnValue = false;	// нужна для работы ondrop
 			}
 		}
 	}
