@@ -12,7 +12,16 @@ export default function Api(url, method) {
 				$.get(self.url, parameters, callback);
 				break;
 			case 'post':
-				$.post(self.url, parameters, callback);
+				$.ajax({
+					url: self.url,
+					type: 'POST',
+					data: parameters,
+					cache: true,
+					dataType: 'json',
+					processData: false,
+					contentType: false,
+					success: callback
+				});
 				break;
 			case 'json':
 				$.getJSON(self.url, parameters, callback);
@@ -25,6 +34,7 @@ export default function Api(url, method) {
 
 	self.url = url;
 	self.method = method;
+	self.execute = execute;
 
 	return self;
 }
