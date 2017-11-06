@@ -1,8 +1,14 @@
 ﻿<template>
-	<div id="rrrt" class="file-loader" v-on:dragenter="dragenter" v-on:dragleave="dragleave" v-on:dragover="dragOver" v-on:drop="drop">
-		<div class="file-loader-interface">
-			<input type="file" multiple="multiple" @change="change">
-			<input type="submit" @click="send">
+	<div class="file-loader">
+		<div class="file-loader-canvas" :class="{ 'dragable' : dragable }"
+			 v-on:dragenter="dragenter" v-on:dragleave="dragleave" v-on:dragover="dragOver" v-on:drop="drop">
+			<div class="file-loader-interface" v-show="!dragable">
+				<input type="file" multiple="multiple" @change="change">
+				<input type="submit" @click="send">
+			</div>
+			<div class="file-loader-interface" v-show="dragable">
+				Отпустите для загрузки
+			</div>
 		</div>
 	</div>
 </template>
@@ -14,7 +20,8 @@
 		props: [],
 		data: function () {
 			return {
-				files: []
+				files: [],
+				dragable: false
 			}
 		},
 		computed: {
@@ -37,17 +44,24 @@
 			},
 			drop: function () {
 				event.preventDefault();
-				this.files = event.dataTransfer.files;
-				this.send();
+				if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+					this.files = event.dataTransfer.files;
+					this.send();
+				}
+				else {
+					alert("Не файл");
+				}
+				this.dragable = false;
 			},
 			dragenter: function (event) {
-				var element = $(event.target);
+				this.dragable = true;
 			},
 			dragleave: function (event) {
-				var element = $(event.target);
+				this.dragable = false;
 			},
 			dragOver: function () {
 				event.returnValue = false;	// нужна для работы ondrop
+				this.dragable = true;
 			}
 		}
 	}
