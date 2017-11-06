@@ -1,1 +1,2 @@
-﻿import './input/all.js';
+﻿import './api/all.js';
+import './input/all.js';
