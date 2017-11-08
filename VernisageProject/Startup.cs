@@ -57,6 +57,8 @@ namespace VernisageProject {
 
 		private void ConfigureUserServices(IServiceCollection services) {
 			services.AddTransient<IProductsRepository, ProductsRepository>();
+			services.AddTransient<IFilesRepository, FilesRepository>();
+
 			services.AddTransient<IFileManager, FileManager>();
 		}
 	}
