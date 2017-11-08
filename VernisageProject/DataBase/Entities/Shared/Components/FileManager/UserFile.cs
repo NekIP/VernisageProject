@@ -10,7 +10,7 @@ namespace VernisageProject.Models.Shared.Components.FileManager {
 		public string PhysicalPath { get; set; }
 		public string Path { get; set; }
 		public string HRef { get; set; }
-		public int Length { get; set; }
+		public long Length { get; set; }
 		public DateTime DateCreated { get; set; }
 		public FileType Type { get; set; }
 	}

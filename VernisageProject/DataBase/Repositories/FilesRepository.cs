@@ -14,8 +14,8 @@ namespace VernisageProject.DataBase.Repositories {
 		Task MoveFile(string physicalFilePath, string newPhysicalFilePath, string newFilePath);
 		Task<UserFile> GetFileFromPhysicalPath(string physicalFilePath);
 		Task<List<UserFile>> FindFile(string keywords);
-		Task AddFile(UserFile file, bool withReplacment);
-		Task RenameFile(string physicalFilePath, string newFileName, bool withReplacment);
+		Task AddFile(UserFile file, bool withReplacment = false);
+		Task RenameFile(string physicalFilePath, string newFileName, bool withReplacment = false);
 	}
 
 	public class FilesRepository : Repository<UserFile>, IFilesRepository {
