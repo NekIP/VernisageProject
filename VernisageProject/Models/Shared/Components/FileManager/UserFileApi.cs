@@ -4,7 +4,7 @@ using VernisageProject.Models.Shared.Components.FileManager;
 namespace VernisageProject.ModelsApi.Shared.Components.FileManager {
 	public class UserFileApi {
 		public string Name { get; set; }
-		public int Length { get; set; }
+		public long Length { get; set; }
 		public DateTime DateCreated { get; set; }
 		public string Type { get; set; }
 
