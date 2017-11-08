@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using VernisageProject.DataBase.Repositories;
 
 namespace VernisageProject.Buisness.Shared.Components.FileManager {
 	public interface IFileManager {
@@ -14,8 +15,11 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 
 	public class FileManager : IFileManager {
 		private readonly IHostingEnvironment AppEnvironment;
-		public FileManager(IHostingEnvironment appEnvironment) {
+		private readonly IFilesRepository FilesRepository;
+
+		public FileManager(IHostingEnvironment appEnvironment, IFilesRepository filesRepository) {
 			AppEnvironment = appEnvironment;
+			FilesRepository = filesRepository;
 		}
 
 		public async Task Load(IFormFileCollection files) {
@@ -33,6 +37,10 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 					}
 				}
 			}
+		}
+
+		public async Task Delete(string filePath, string newFileName) {
+			
 		}
 	}
 }

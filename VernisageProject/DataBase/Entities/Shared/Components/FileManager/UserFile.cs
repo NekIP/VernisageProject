@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VernisageProject.DataBase;
 
 namespace VernisageProject.Models.Shared.Components.FileManager {
-	public class File : Entity {
+	public class UserFile : Entity {
 		public string Name { get; set; }
 		public string PhysicalPath { get; set; }
 		public string Path { get; set; }
