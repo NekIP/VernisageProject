@@ -12,8 +12,22 @@ namespace VernisageProject.DataBase.Repositories {
 	public class FilesRepository : Repository<UserFile>, IFilesRepository {
 		public FilesRepository(IConfiguration configuration) : base("fileManager", configuration) { }
 
-		public async Task DeleteFile(string filePath) {
-			await this.Remove(x => x.PhysicalPath == filePath);
+		public async Task ReplaceFile(string physicalFilePathForReplacement, UserFile fileReplace) {
+			try {
+				await this.Update(x => x.PhysicalPath == physicalFilePathForReplacement, fileReplace);
+			}
+			catch {
+				throw;
+			}
+		}
+
+		public async Task DeleteFile(string physicalFilePath) {
+			try {
+				await this.Remove(x => x.PhysicalPath == physicalFilePath);
+			}
+			catch {
+				throw;
+			}
 		}
 
 		public async Task CopyFile(string physicalFilePath, string newFileName) {		
@@ -24,8 +38,8 @@ namespace VernisageProject.DataBase.Repositories {
 				file.HRef = file.HRef.Replace(file.Name, newFileName);
 				await this.Add(file);
 			}
-			catch (Exception e) {
-				throw e;
+			catch {
+				throw;
 			}
 		}
 
@@ -37,8 +51,8 @@ namespace VernisageProject.DataBase.Repositories {
 				file.HRef = "-"; // TODO
 				await this.Update(x => x.PhysicalPath == physicalFilePath, file);
 			}
-			catch (Exception e) {
-				throw e;
+			catch {
+				throw;
 			}
 		}
 
