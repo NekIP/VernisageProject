@@ -12,6 +12,10 @@ using VernisageProject.Models.Shared.Components.FileManager;
 namespace VernisageProject.Buisness.Shared.Components.FileManager {
 	public interface IFileManager {
 		Task Load(string currentPath, IFormFileCollection files);
+		Task Delete(string filePath);
+		Task Copy(string filePath, string newFileName);
+		Task Move(string filePath, string newFilePath);
+		Task<List<UserFile>> Folder(string currentFolder);
 	}
 
 	public class FileManager : IFileManager {
@@ -19,16 +23,10 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		private readonly IFilesRepository FilesRepository;
 		private readonly string PhysicalBasePath;
 
-		public string CurrentPysicalDirectory {
-			get {
-				return "/";
-			}
-		}
-
 		public FileManager(IHostingEnvironment appEnvironment, IFilesRepository filesRepository) {
 			AppEnvironment = appEnvironment;
 			FilesRepository = filesRepository;
-			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath, "wwwroot/hosting");
+			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath, "wwwroot/hosting"); // TODO user path
 		}
 
 		public async Task Load(string currentPath, IFormFileCollection files) {
@@ -37,8 +35,8 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 								.Parse(file.ContentDisposition)
 								.FileName
 								.Trim('"');
-				var physicalPath = Path.Combine(PhysicalBasePath, filename);
-				using (var fileStream = new FileStream(physicalPath, FileMode.Create)) {
+				var physicalPath = Path.Combine(PhysicalBasePath, currentPath, filename);
+				using (var fileStream = new FileStream(physicalPath, FileMode.OpenOrCreate)) {
 					using (var fileReading = file.OpenReadStream()) {
 						var bytes = new byte[fileReading.Length];
 						await fileReading.ReadAsync(bytes, 0, bytes.Length);
@@ -49,17 +47,18 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 					DateCreated = DateTime.Now,
 					Length = file.Length,
 					Name = filename,
-					Path = currentPath,
-					PhysicalPath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentPath),
-					Href = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentPath),
+					Path = Path.Combine(currentPath, filename),
+					PhysicalPath = physicalPath,
+					Href = physicalPath,
 					Type = UserFileType.File
 				});
 			}
 		}
 
 		public async Task Delete(string filePath) {
-			File.Delete(PhysicalBasePath + filePath);
-			await FilesRepository.DeleteFile(PhysicalBasePath + filePath);
+			var physicalFilePath = Path.Combine(PhysicalBasePath, filePath);
+			File.Delete(physicalFilePath);
+			await FilesRepository.DeleteFile(physicalFilePath);
 		}
 
 		public async Task Copy(string filePath, string newFileName) {
@@ -68,14 +67,14 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		}
 
 		public async Task Move(string filePath, string newFilePath) {
-			var physicalFilePath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, filePath);
-			var newPhysicalFilePath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, newFilePath);
+			var physicalFilePath = Path.Combine(PhysicalBasePath, filePath);
+			var newPhysicalFilePath = Path.Combine(PhysicalBasePath, newFilePath);
 			File.Move(physicalFilePath, newPhysicalFilePath);
 			await FilesRepository.MoveFile(physicalFilePath, newPhysicalFilePath, newFilePath);
 		}
 
 		public async Task<List<UserFile>> Folder(string currentFolder) {
-			var currentPhysicalFolder = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentFolder);
+			var currentPhysicalFolder = Path.Combine(PhysicalBasePath, currentFolder);
 			var files = await FilesRepository.GetFilesFromFolder(currentPhysicalFolder);
 			return files;
 		}
