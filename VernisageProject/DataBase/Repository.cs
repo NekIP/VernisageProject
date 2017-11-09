@@ -70,7 +70,7 @@ namespace VernisageProject.DataBase {
 		}
 
 		public Task<List<T>> Execute() {
-			if (CurrentContext == null) {
+			if (CurrentContext != null) {
 				var result = CurrentContext.ToListAsync();
 				CurrentContext = null;
 				return result;

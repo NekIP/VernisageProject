@@ -26,7 +26,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		public FileManager(IHostingEnvironment appEnvironment, IFilesRepository filesRepository) {
 			AppEnvironment = appEnvironment;
 			FilesRepository = filesRepository;
-			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath, "wwwroot/hosting"); // TODO user path
+			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath.Replace("\\", "/"), "wwwroot/hosting"); // TODO user path
 		}
 
 		public async Task Load(string currentPath, IFormFileCollection files) {
@@ -35,14 +35,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 								.Parse(file.ContentDisposition)
 								.FileName
 								.Trim('"');
-				var physicalPath = Path.Combine(PhysicalBasePath, currentPath, filename);
-				using (var fileStream = new FileStream(physicalPath, FileMode.OpenOrCreate)) {
-					using (var fileReading = file.OpenReadStream()) {
-						var bytes = new byte[fileReading.Length];
-						await fileReading.ReadAsync(bytes, 0, bytes.Length);
-						await fileStream.WriteAsync(bytes, 0, bytes.Length);
-					}
-				}
+				var physicalPath = PhysicalBasePath + currentPath + filename;
 				await FilesRepository.AddFile(new UserFile {
 					DateCreated = DateTime.Now,
 					Length = file.Length,
@@ -52,6 +45,13 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 					Href = physicalPath,
 					Type = UserFileType.File
 				});
+				using (var fileStream = new FileStream(physicalPath, FileMode.OpenOrCreate)) {
+					using (var fileReading = file.OpenReadStream()) {
+						var bytes = new byte[fileReading.Length];
+						await fileReading.ReadAsync(bytes, 0, bytes.Length);
+						await fileStream.WriteAsync(bytes, 0, bytes.Length);
+					}
+				}
 			}
 		}
 
