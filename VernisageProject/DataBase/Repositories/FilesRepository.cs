@@ -14,6 +14,7 @@ namespace VernisageProject.DataBase.Repositories {
 		Task MoveFile(string physicalFilePath, string newPhysicalFilePath, string newFilePath);
 		Task<UserFile> GetFileFromPhysicalPath(string physicalFilePath);
 		Task<List<UserFile>> FindFile(string keywords);
+		Task<List<UserFile>> GetFilesFromFolder(string currentPhysicalFolder);
 		Task AddFile(UserFile file, bool withReplacment = false);
 		Task RenameFile(string physicalFilePath, string newFileName, bool withReplacment = false);
 	}
@@ -33,7 +34,7 @@ namespace VernisageProject.DataBase.Repositories {
 			var file = await GetFileFromPhysicalPath(physicalFilePath);
 			file.PhysicalPath = file.PhysicalPath.Replace(file.Name, newFileName);
 			file.Path = file.Path.Replace(file.Name, newFileName);
-			file.HRef = file.HRef.Replace(file.Name, newFileName);
+			file.Href = file.Href.Replace(file.Name, newFileName);
 			await this.Add(file);
 		}
 
@@ -41,13 +42,23 @@ namespace VernisageProject.DataBase.Repositories {
 			var file = await GetFileFromPhysicalPath(physicalFilePath);
 			file.PhysicalPath = newPhysicalFilePath;
 			file.Path = newFilePath;
-			file.HRef = "-"; // TODO
+			file.Href = "-"; // TODO
 			await this.Update(x => x.PhysicalPath == physicalFilePath, file);
 		}
 
 		public async Task<UserFile> GetFileFromPhysicalPath(string physicalFilePath) {
 			var result = (await this.Where(x => x.PhysicalPath == physicalFilePath).Execute())
 				.FirstOrDefault();
+			if (result != null) {
+				return result;
+			}
+			else {
+				throw new FileNotFoundException();
+			}
+		}
+
+		public async Task<List<UserFile>> GetFilesFromFolder(string currentPhysicalFolder) {
+			var result = await this.Where(x => x.PhysicalPath.StartsWith(currentPhysicalFolder)).Execute();
 			if (result != null) {
 				return result;
 			}
@@ -85,7 +96,7 @@ namespace VernisageProject.DataBase.Repositories {
 				file.Name = newFileName;
 				file.PhysicalPath = file.PhysicalPath.Replace(file.Name, newFileName);
 				file.Path = file.Path.Replace(file.Name, newFileName);
-				file.HRef = file.HRef.Replace(file.Name, newFileName);
+				file.Href = file.Href.Replace(file.Name, newFileName);
 				await this.Update(x => x.PhysicalPath == physicalFilePath, file);
 			}
 			else {

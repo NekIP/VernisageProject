@@ -11,7 +11,7 @@ using VernisageProject.Models.Shared.Components.FileManager;
 
 namespace VernisageProject.Buisness.Shared.Components.FileManager {
 	public interface IFileManager {
-		Task Load(IFormFileCollection files);
+		Task Load(string currentPath, IFormFileCollection files);
 	}
 
 	public class FileManager : IFileManager {
@@ -19,7 +19,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		private readonly IFilesRepository FilesRepository;
 		private readonly string PhysicalBasePath;
 
-		public string CurrentPath {
+		public string CurrentPysicalDirectory {
 			get {
 				return "/";
 			}
@@ -28,10 +28,10 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		public FileManager(IHostingEnvironment appEnvironment, IFilesRepository filesRepository) {
 			AppEnvironment = appEnvironment;
 			FilesRepository = filesRepository;
-			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath, "wwwroot/hosting");     // TODO: added path for current user
+			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath, "wwwroot/hosting");
 		}
 
-		public async Task Load(IFormFileCollection files) {
+		public async Task Load(string currentPath, IFormFileCollection files) {
 			foreach (var file in files) {
 				var filename = ContentDispositionHeaderValue
 								.Parse(file.ContentDisposition)
@@ -49,10 +49,10 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 					DateCreated = DateTime.Now,
 					Length = file.Length,
 					Name = filename,
-					Path = CurrentPath,
-					PhysicalPath = PhysicalBasePath + CurrentPath,
-					HRef = PhysicalBasePath + CurrentPath,
-					Type = FileType.File
+					Path = currentPath,
+					PhysicalPath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentPath),
+					Href = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentPath),
+					Type = UserFileType.File
 				});
 			}
 		}
@@ -68,22 +68,16 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		}
 
 		public async Task Move(string filePath, string newFilePath) {
-			File.Move(PhysicalBasePath + filePath, PhysicalBasePath + newFilePath);
-			await FilesRepository.MoveFile(PhysicalBasePath + filePath, 
-				PhysicalBasePath + newFilePath, 
-				newFilePath);
+			var physicalFilePath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, filePath);
+			var newPhysicalFilePath = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, newFilePath);
+			File.Move(physicalFilePath, newPhysicalFilePath);
+			await FilesRepository.MoveFile(physicalFilePath, newPhysicalFilePath, newFilePath);
 		}
 
-		/*public async Task AddFolder(string folderName) {
-			await FilesRepository.AddFile(new UserFile {
-				DateCreated = DateTime.Now,
-				Length = 0,
-				Name = filename,
-				Path = CurrentPath,
-				PhysicalPath = PhysicalBasePath + CurrentPath,
-				HRef = PhysicalBasePath + CurrentPath,
-				Type = FileType.File
-			});
-		}*/
+		public async Task<List<UserFile>> Folder(string currentFolder) {
+			var currentPhysicalFolder = Path.Combine(PhysicalBasePath, CurrentPysicalDirectory, currentFolder);
+			var files = await FilesRepository.GetFilesFromFolder(currentPhysicalFolder);
+			return files;
+		}
 	}
 }

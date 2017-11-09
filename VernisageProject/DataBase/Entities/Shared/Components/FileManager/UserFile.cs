@@ -9,13 +9,13 @@ namespace VernisageProject.Models.Shared.Components.FileManager {
 		public string Name { get; set; }
 		public string PhysicalPath { get; set; }
 		public string Path { get; set; }
-		public string HRef { get; set; }
+		public string Href { get; set; }
 		public long Length { get; set; }
 		public DateTime DateCreated { get; set; }
-		public FileType Type { get; set; }
+		public UserFileType Type { get; set; }
 	}
 
-	public enum FileType {
+	public enum UserFileType {
 		Folder,
 		File
 	}
