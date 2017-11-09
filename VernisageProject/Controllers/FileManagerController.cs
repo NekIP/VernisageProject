@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VernisageProject.Buisness.Shared.Components.FileManager;
+using VernisageProject.Models.Shared.Components.FileManager;
 
 namespace VernisageProject.Controllers {
 	public class TestApi {
@@ -27,6 +28,13 @@ namespace VernisageProject.Controllers {
 		public async Task Load() {
 			var files = Request.Form.Files;
 			await FileManager.Load("/", files);
+		}
+
+		[HttpGet]
+		[Route("list")]
+		public async Task<List<UserFileApi>> List(string currentDirectory) {
+			var result = await FileManager.List(currentDirectory);
+			return result.Select(x => UserFileApi.Map(x)).ToList();
 		}
 	}
 }

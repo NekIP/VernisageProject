@@ -14,7 +14,7 @@ namespace VernisageProject.DataBase.Repositories {
 		Task MoveFile(string physicalFilePath, string newPhysicalFilePath, string newFilePath);
 		Task<UserFile> GetFileFromPhysicalPath(string physicalFilePath);
 		Task<List<UserFile>> FindFile(string keywords);
-		Task<List<UserFile>> GetFilesFromFolder(string currentPhysicalFolder);
+		Task<List<UserFile>> GetFilesFromDirectory(string currentPhysicalFolder);
 		Task AddFile(UserFile file, bool withReplacment = false);
 		Task RenameFile(string physicalFilePath, string newFileName, bool withReplacment = false);
 	}
@@ -57,7 +57,7 @@ namespace VernisageProject.DataBase.Repositories {
 			}
 		}
 
-		public async Task<List<UserFile>> GetFilesFromFolder(string currentPhysicalFolder) {
+		public async Task<List<UserFile>> GetFilesFromDirectory(string currentPhysicalFolder) {
 			var result = await this.Where(x => x.PhysicalPath.StartsWith(currentPhysicalFolder)).Execute();
 			if (result != null) {
 				return result;

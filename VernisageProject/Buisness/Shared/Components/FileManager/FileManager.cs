@@ -15,7 +15,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		Task Delete(string filePath);
 		Task Copy(string filePath, string newFileName);
 		Task Move(string filePath, string newFilePath);
-		Task<List<UserFile>> Folder(string currentFolder);
+		Task<List<UserFile>> List(string currentFolder);
 	}
 
 	public class FileManager : IFileManager {
@@ -73,9 +73,9 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 			await FilesRepository.MoveFile(physicalFilePath, newPhysicalFilePath, newFilePath);
 		}
 
-		public async Task<List<UserFile>> Folder(string currentFolder) {
-			var currentPhysicalFolder = PhysicalBasePath + currentFolder;
-			var files = await FilesRepository.GetFilesFromFolder(currentPhysicalFolder);
+		public async Task<List<UserFile>> List(string currentDirectory) {
+			var currentPhysicalDirectory = PhysicalBasePath + currentDirectory;
+			var files = await FilesRepository.GetFilesFromDirectory(currentPhysicalDirectory);
 			return files;
 		}
 	}

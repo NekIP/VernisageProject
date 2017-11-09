@@ -1,7 +1,6 @@
 ﻿using System;
-using VernisageProject.Models.Shared.Components.FileManager;
 
-namespace VernisageProject.ModelsApi.Shared.Components.FileManager {
+namespace VernisageProject.Models.Shared.Components.FileManager {
 	public class UserFileApi {
 		public string Name { get; set; }
 		public long Length { get; set; }
