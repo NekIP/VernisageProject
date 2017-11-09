@@ -49,6 +49,7 @@
 			content: function (file) {
 				switch (file.type) {
 					case 'Folder':
+						this.initFilesForCurrentDirectory();
 						break;
 					case 'File':
 						// TODO: Show content
