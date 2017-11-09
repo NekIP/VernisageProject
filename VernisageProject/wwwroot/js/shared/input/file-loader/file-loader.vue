@@ -21,6 +21,7 @@
 		data: function () {
 			return {
 				files: [],
+				currentPath: "/",
 				dragable: false
 			}
 		},
@@ -37,7 +38,6 @@
 				$.each(this.files, function (key, value) {
 					data.append(key, value);
 				});
-				
 				fileLoaderApi.sendFile.execute(data, function (data) {
 					alert("complete");
 				});

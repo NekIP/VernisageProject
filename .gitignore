@@ -5,7 +5,7 @@
 MongoCollections/
 
 #ignor file from file manager
-wwwroot/hosting
+wwwroot/hosting/
 
 # User-specific files
 *.suo
