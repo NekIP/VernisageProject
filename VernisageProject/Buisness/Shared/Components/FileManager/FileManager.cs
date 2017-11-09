@@ -26,7 +26,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		public FileManager(IHostingEnvironment appEnvironment, IFilesRepository filesRepository) {
 			AppEnvironment = appEnvironment;
 			FilesRepository = filesRepository;
-			PhysicalBasePath = Path.Combine(AppEnvironment.ContentRootPath.Replace("\\", "/"), "wwwroot/hosting"); // TODO user path
+			PhysicalBasePath = AppEnvironment.ContentRootPath.Replace("\\", "/") +  "/wwwroot/hosting"; // TODO user path
 		}
 
 		public async Task Load(string currentPath, IFormFileCollection files) {
@@ -40,7 +40,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 					DateCreated = DateTime.Now,
 					Length = file.Length,
 					Name = filename,
-					Path = Path.Combine(currentPath, filename),
+					Path = currentPath + filename,
 					PhysicalPath = physicalPath,
 					Href = physicalPath,
 					Type = UserFileType.File
@@ -56,7 +56,7 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		}
 
 		public async Task Delete(string filePath) {
-			var physicalFilePath = Path.Combine(PhysicalBasePath, filePath);
+			var physicalFilePath = PhysicalBasePath + filePath;
 			File.Delete(physicalFilePath);
 			await FilesRepository.DeleteFile(physicalFilePath);
 		}
@@ -67,14 +67,14 @@ namespace VernisageProject.Buisness.Shared.Components.FileManager {
 		}
 
 		public async Task Move(string filePath, string newFilePath) {
-			var physicalFilePath = Path.Combine(PhysicalBasePath, filePath);
-			var newPhysicalFilePath = Path.Combine(PhysicalBasePath, newFilePath);
+			var physicalFilePath = PhysicalBasePath + filePath;
+			var newPhysicalFilePath = PhysicalBasePath + newFilePath;
 			File.Move(physicalFilePath, newPhysicalFilePath);
 			await FilesRepository.MoveFile(physicalFilePath, newPhysicalFilePath, newFilePath);
 		}
 
 		public async Task<List<UserFile>> Folder(string currentFolder) {
-			var currentPhysicalFolder = Path.Combine(PhysicalBasePath, currentFolder);
+			var currentPhysicalFolder = PhysicalBasePath + currentFolder;
 			var files = await FilesRepository.GetFilesFromFolder(currentPhysicalFolder);
 			return files;
 		}
